@@ -4,12 +4,12 @@
 - _>= PHP 8.2_
 - _CLI de Symfony_
 
-## Installation des dossiers **var** et **vendor**
+## Installation des dossiers var et vendor
 ```
     composer install
 ```
 
-## Créer le fichier **.env.local**
+## Créer le fichier .env.local
 A la racine du projet, créer le fichier **.env.local** et y placer le code suivant :
 
 ```
@@ -20,7 +20,7 @@ A la racine du projet, créer le fichier **.env.local** et y placer le code suiv
     MAILER_DSN=null://null
 ```
 
-### Configurer la variable **DATABASE_URL**
+### Configurer la variable DATABASE_URL
 
 et ensuite lancer la ligne de commande suivante :
 _Attention n'oubliez pas d'allumer le serveur contenant PhpMyAdmin__
