@@ -1,8 +1,8 @@
 # Déploiement d'un projet Symfony 7
 
 ## Pré-requis
-_>= PHP 8.2_
-_CLI de Symfony_
+- _>= PHP 8.2_
+- _CLI de Symfony_
 
 ## Installation des dossiers **var** et **vendor**
 ```
