@@ -1,0 +1,42 @@
+/* le code CSS accessible sur toutes les routes */
+
+body{
+    background-color: rgb(221, 248, 255);
+}
+
+.imgHome{
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.icon{
+    width: 25px;
+    height: 25px;
+}
+
+.imgDefaut{
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.imgDefaut30{
+    width: 30%;
+    display: block;
+    margin: 0 auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.size20{
+    font-size: 20px;
+}
+
+.shadowBart{
+    box-shadow: 2px 2px 4px grey;
+}

@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg bg-warning">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ path('app_home') }}">Ecommerce</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_catalog') }}">Catalogue</a>
+                </li>
+
+                
+
+
+                
+                {% if app.user %}{# Si l'utilisateur est connecté #}
+
+                    {#
+                        Dans l'objet user il y a la propriété roles
+                        La fonctiont twig is_granted permet de vérifier si l'argument (un rôle) existe dans le tableau des roles
+                     #}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_admin') }}">Back office</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+
+                {% else %}{# Si l'utilisateur n'est pas connecté #}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+
+                {% endif %}
+
+                
+
+                
+
+                {# 
+                    à placer dans le footer
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_legal_notices') }}">Mentions légales</a>
+                    </li>
+                 #}
+
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+{#
+    La fonction twig path() permet de rediriger (liens internes)
+    1e argument (obligatoire) type string : nom(name) de la route 
+    2e argument (facultatif) type array : tableau des paramètres
+
+    un array en php  : [ 'k' => 'v' ]
+    un array en twig : {  'k' : 'v' }
+#}
+
+

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Gestion des marques ({{brands|length}}){% endblock %}
+
+{% block body %}
+
+<a class="btn btn-primary" href="{{ path('app_brand_new') }}">Ajouter une marque</a>
+
+
+    <table class="table table-striped table-hover table-bordered text-center mt-4">
+        <thead class="table-warning">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Quantité</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for brand in brands %}
+            <tr>
+                <td>{{ brand.id }}</td>
+                <td>{{ brand.name }}</td>
+                <td>{{ brand.products|length }}</td>
+                <td>
+                    <a href="{{ path('app_brand_show', {'id': brand.id}) }}">{{ ux_icon('lucide:file', {class : 'text-warning icon'}) }}</a>
+                    <a href="{{ path('app_brand_edit', {'id': brand.id}) }}">{{ ux_icon('lucide:edit', {class : 'text-info icon'}) }}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun résultat</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

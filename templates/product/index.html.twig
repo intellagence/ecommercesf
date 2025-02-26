@@ -1,0 +1,124 @@
+{% extends "base.html.twig" %}
+
+{% block h1 %}Gestion des produits ({{products|length}}){% endblock %}
+
+{% block body %}
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gestion des produits</li>
+        </ol>
+    </nav>
+
+    <a class="btn btn-primary" href="{{ path('app_product_new') }}">Ajouter un produit</a>
+
+    <table class="table table-striped table-hover table-bordered text-center mt-4">
+        <thead class="table-warning">
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Prix (€)</th>
+                <th>Description</th>
+                <th>Catégorie</th>
+                <th>Marque</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {#
+                products est un tableau d'objets issu de l'entity Product
+                ma boucle for extrait à chaque tour un objet product
+
+                on n'affice un objet sur la navigateur (un objet ne peut pas être converti en string)
+
+                dans l'objet, il y a des propriétés (title, price, description)
+
+                syntaxe :
+                    parent.enfant
+
+                    object.property
+
+                    si la propriété est un objet 
+
+                    object.object.property
+            
+            #}
+            {% for product in products %}
+                <tr class="align-middle">
+                    <td>{{ product.id }}</td>
+                    {# 
+                        filters   
+                        syntaxe : name|filter
+
+
+                        capitalize : 1e lettre en majuscule
+                        lower : tout en minuscule
+                        upper : tout en majuscule
+                        length : calcul une string ou un array
+                        slice : retourner une partie de la string (1e arg : position, 2e arg : quantité)
+
+
+                        ~ : le tilde est la concaténation en twig
+                    #}
+                    <td>{{ product.title|capitalize }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>
+                        {# {% if product.description is not empty %} #}
+                        {% if product.description %}
+           
+                            {% if product.description|length > 30 %}
+                                {{ product.description|slice(0,27) ~ '...' }}
+                            {% else %}
+                                {{ product.description }}
+                            {% endif %}
+
+                        {% else %}
+                            <span class="text-warning fst-italic">Non renseignée</span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if product.category %}
+                            <a href="{{ path('app_category_show', {'id' : product.category.id }) }}">{{ product.category.name }}</a>
+                        {% else %}
+                            {{ ux_icon('iconoir:xmark', {class : 'text-danger icon'}) }}
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if product.brand %}
+                            {{ product.brand.name }}
+                        {% else %}
+                            {{ ux_icon('iconoir:xmark', {class : 'text-danger icon'}) }}
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <a href="{{ path('app_product_show', {'id' : product.id }) }}">
+                            {{ ux_icon('lucide:file', {class : 'text-warning icon'}) }}
+                        </a>
+
+                        <a href="{{ path('app_product_edit', {'id' : product.id }) }}">
+                            {{ ux_icon('lucide:edit', {class : 'text-info icon'}) }}
+                        </a>
+
+                        <a 
+                            href="{{ path('app_product_delete', {'id' : product.id }) }}"
+                            onclick="return confirm('Etes-vous sûr de vouloir supprimer ce produit ?')"
+                        >
+                            {{ ux_icon('lucide:trash-2', {class : 'text-danger icon'}) }}
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun résultat</td>
+                </tr>  
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

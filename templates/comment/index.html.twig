@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Commentaires en attente{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Produit</th>
+                <th>Utilisateur</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.message }}</td>
+                <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    {% if comment.product %}
+                        {{ comment.product.title }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if comment.user %}
+                        {{ comment.user.email }}
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_comment_show', {'id': comment.id}) }}">show</a>
+                    <a href="{{ path('app_comment_edit', {'id': comment.id}) }}">Accepter</a>
+                    {% include "comment/_delete_form.html.twig" %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

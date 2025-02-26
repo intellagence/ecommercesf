@@ -1,0 +1,97 @@
+{% extends "base.html.twig" %}
+
+{% block h1 %}{{ product.title }}{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-primary" href="{{ path('app_product_index') }}">Gestion des produits</a>
+
+    <table class="table table-striped table-hover table-bordered text-center mt-4">
+
+        <tr>
+            <th>ID</th>
+            <td>{{ product.id}}</td>
+        </tr>
+        <tr>
+            <th>Titre</th>
+            <td>{{ product.title}}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ product.price}} €</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>
+                {% if product.description %}
+                    {{ product.description }}
+                {% else %}
+                    <span class="text-warning fst-italic">Non renseignée</span>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th>Catégorie</th>
+            <td>
+                {% if product.category %}
+                    <a href="{{ path('app_category_show', {'id' : product.category.id }) }}">{{ product.category.name }}</a>
+                {% else %}
+                    {{ ux_icon('lucide:beer-off', {class : 'text-danger icon'}) }}
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th>Marque</th>
+            <td>
+                {% if product.brand %}
+                    <a href="{{ path('app_brand_show', {'id' : product.brand.id }) }}">{{ product.brand.name }}</a>
+                {% else %}
+                    {{ ux_icon('lucide:beer-off', {class : 'text-danger icon'}) }}
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            {% set count = product.materials|length %}
+            {% if count > 1 %}
+                {% set pluriel = 's' %}
+            {% else %}
+                {% set pluriel = '' %}
+            {% endif %}
+            <th>Matière{{pluriel}}</th>
+            <td>
+                {# 
+                    La propriété materials de product est un tableau d'objets material
+                #}
+                {% if product.materials|length > 0 %}
+                    <ul class="list-group">
+                        {% for material in product.materials %}
+                            <li class="list-group-item">{{ material.name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    {{ ux_icon('iconoir:xmark', {class : 'text-danger icon'}) }}
+                {% endif %}
+                
+            </td>
+        </tr>
+    
+    </table>
+
+    {#
+        Dans l'objet product il y a des propriétés telles que :
+
+        - id, title, price, description 
+            syntaxe objet.property : exemple : product.title
+
+        - Propriétés relationnelles
+            - One => Objet.Objet.propriété exemple : product.category.name 
+            - Many => Objet.Objets est un tableau 
+                product.materials est un tableau d'objets materials
+
+    
+    #}
+
+{% endblock %}

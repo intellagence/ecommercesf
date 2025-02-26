@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}{# héritage du fichier base.html.twig #}
+
+{% block h1 %}Accueil{% endblock %}
+
+{% block body %}
+
+
+    {#
+        Observation :
+
+        Si l'utilisateur est connecté, app.user retourne un objet de la class User
+        Si l'utilisateur n'est pas connecté, app.user retourne null
+    #}
+    {# <pre>
+        {{ dump(app.user) }}
+    </pre> #}
+
+    <img src="{{ asset('image/ecommerce.jpg') }}" alt="ecommerce" class="imgHome">
+
+    <h2>Bonjour {{ firstNameTwig }}</h2>
+
+    {# <pre>
+        {{ dump(fruits) }}
+    </pre> #}
+
+    
+
+    {# foreach($fruits as $fruit) #}
+    {% for fruit in fruits %}
+        <h3>{{ fruit }}</h3>
+    {% else %}
+        <h3 class="text-danger">Pas de fruits</h3>
+    {% endfor %}
+
+    {# for : boucle d'itération #}
+    {% for i in 1..5 %}
+        <h4>{{ i }}</h4>
+    {% endfor %}
+
+    {% if age >= 18 %}
+        <h5 class="text-success">Tu es majeur</h5>
+    {% else %}
+        <h5 class="text-danger">Tu es mineur</h5>
+    {% endif %}
+
+{% endblock %}
+
