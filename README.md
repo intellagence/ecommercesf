@@ -38,6 +38,10 @@ Il y a 2 possibilités :
 ```
     symfony console doctrine:migrations:migrate
 ```
+## Les fixtures
+```
+    symfony console doctrine:fixtures:load
+```
 
 ## Allumer le serveur de Symfony
 ```
