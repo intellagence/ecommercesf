@@ -33,14 +33,16 @@
 
         <button class="btn btn-primary w-100 my-2" type="submit">Connexion</button>
 
-        <div class="text-center">
-            <div>
-                <a href="">Mot de passe oublié ?</a>
-            </div>
-            <div>
-                <a href="{{ path('app_register') }}">Pas encore inscrit ?</a>
-            </div>
-        </div>
+
         
     </form>
+
+    <div class="text-center">
+        <div>
+            <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+        </div>
+        <div>
+            <a href="{{ path('app_register') }}">Pas encore inscrit ?</a>
+        </div>
+    </div>
 {% endblock %}

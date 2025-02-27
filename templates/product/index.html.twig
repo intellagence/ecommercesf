@@ -23,6 +23,7 @@
                 <th>Description</th>
                 <th>Catégorie</th>
                 <th>Marque</th>
+                <th>Image</th>
                 <th></th>
             </tr>
         </thead>
@@ -97,6 +98,14 @@
                     </td>
 
                     <td>
+                        {% if product.picture %}
+                            <img src="{{ asset('image/product/' ~ product.picture) }}" alt="" class="imgProduct">
+                        {% else %}
+                            {{ ux_icon('iconoir:xmark', {class : 'text-danger icon'}) }}
+                        {% endif %}
+                    </td>
+
+                    <td>
                         <a href="{{ path('app_product_show', {'id' : product.id }) }}">
                             {{ ux_icon('lucide:file', {class : 'text-warning icon'}) }}
                         </a>
@@ -115,7 +124,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7">Aucun résultat</td>
+                    <td colspan="8">Aucun résultat</td>
                 </tr>  
             {% endfor %}
         </tbody>

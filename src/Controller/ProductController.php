@@ -79,6 +79,47 @@ final class ProductController extends AbstractController
         // Si le formulaire a été soumis (click sur le bouton submit)
         // Si le formulaire respecte les conditions/constraints
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $pictureFile = $form->get('picture')->getData();
+
+            //dd($pictureFile);
+
+            /*
+                S'il n'y a pas d'image chargée (formulaire) alors $pictureFile est null
+                S'il y a une image chargée (formulaire) alors $pictureFile n'est pas null, il est un objet de la class UploadedFile
+
+            */
+            // traitement de l'image s'il y en a une
+            if ($pictureFile) {
+
+                // 1e : Définir le nom du fichier
+                    $pictureFileName = date('YmdHis') . '-' . rand(1000,9999) . '-' . $pictureFile->getClientOriginalName();
+                    // YYYYmmddHHiiss
+                    //dd($pictureFileName);
+
+                // 2e : Enregistrer le fichier image dans le dossier public
+
+                    $pictureFile->move(
+                        $this->getParameter('picture_parameter'),
+                        $pictureFileName
+                    );
+                    // move : 2 arguments
+                    // 1e : emplacement (services.yaml)
+                    /*
+                        config/services.yaml
+                        parameters:
+                            picture_parameter: '%kernel.project_dir%/public/image/product'
+
+                    */
+                    // 2e : nom du fichier
+
+                // 3e : Enregistrer le nom du fichier dans l'objet $product
+                    $product->setPicture($pictureFileName);
+            }
+
+
+
             // INSERTION EN BDD
             // dump($product);
 

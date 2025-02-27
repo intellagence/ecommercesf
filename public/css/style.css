@@ -21,6 +21,14 @@ body{
     object-fit: cover;
 }
 
+.imgProduct{
+    width: 100px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+
+
 .imgDefaut30{
     width: 30%;
     display: block;
