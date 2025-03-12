@@ -181,6 +181,24 @@ final class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $pictureFile = $form->get('picture')->getData();
+
+            if ($pictureFile) {
+
+                if ($product->getPicture()) {
+                    unlink($this->getParameter('picture_parameter') . '/' . $product->getPicture());
+                }
+
+                $pictureFileName = date('YmdHis') . '-' . rand(1000,9999) . '-' . $pictureFile->getClientOriginalName();
+
+                $pictureFile->move(
+                    $this->getParameter('picture_parameter'),
+                    $pictureFileName
+                );
+
+                $product->setPicture($pictureFileName);
+            }
+
             $em->flush();
             $this->addFlash('success', 'Le produit a bien été modifié');
             return $this->redirectToRoute('app_product_index');
@@ -195,6 +213,10 @@ final class ProductController extends AbstractController
     #[Route('/supprimer/{id}', name:'app_product_delete')]
     public function delete(Product $product, EntityManagerInterface $em): Response
     {
+        if ($product->getPicture()) {
+            unlink($this->getParameter('picture_parameter') . '/' . $product->getPicture());
+        }
+
         $em->remove($product);
         $em->flush();
         $this->addFlash('success', 'Le produit a bien été supprimé');
