@@ -93,6 +93,7 @@ class AppFixtures extends Fixture
            $product = new Product();
            $product->setTitle($categories[$keyAleatoireCategory] . ' en ' . $matieres[$keyAleatoireMatiere]);
            $product->setPrice($price);
+           $product->setStatus(1);
            $product->setDescription($descriptions[$keyAleatoireDescription]);
            $product->setCategory($categoriesObjects[$keyAleatoireCategoryObject]);
            $product->setBrand($marquesObjects[$keyAleatoireMarqueObject]);

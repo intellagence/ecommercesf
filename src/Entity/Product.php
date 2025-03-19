@@ -46,6 +46,9 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $status = false;
+
     public function __construct()
     {
         $this->materials = new ArrayCollection();
@@ -179,6 +182,18 @@ class Product
     public function setPicture(?string $picture): static
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function isStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

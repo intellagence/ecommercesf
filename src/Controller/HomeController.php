@@ -111,7 +111,8 @@ final class HomeController extends AbstractController // héritage de AbstractCo
     // #[IsGranted('ROLE_ADMIN')]
     public function catalog(ProductRepository $productRepository): Response
     {
-        $products = $productRepository->findAll();
+        $products = $productRepository->findBy(['status' => true]); 
+        // SELECT * FROM product WHERE status = 1
 
         return $this->render('home/catalog.html.twig', [
             'products' => $products

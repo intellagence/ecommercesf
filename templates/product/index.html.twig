@@ -106,20 +106,37 @@
                     </td>
 
                     <td>
-                        <a href="{{ path('app_product_show', {'id' : product.id }) }}">
-                            {{ ux_icon('lucide:file', {class : 'text-warning icon'}) }}
-                        </a>
 
-                        <a href="{{ path('app_product_edit', {'id' : product.id }) }}">
-                            {{ ux_icon('lucide:edit', {class : 'text-info icon'}) }}
-                        </a>
+                        <div class="row justify-content-center">
+                            <div class="form-check form-switch col-2">
+                                <input 
+                                    class="form-check-input checkStatus" 
+                                    type="checkbox" 
+                                    role="switch" 
+                                    id="flexSwitchCheckDefault"
+                                    value="{{ product.id }}"
+                                    {% if product.status %}checked{% endif %}
+                                    
+                                >
+                            </div>
 
-                        <a 
-                            href="{{ path('app_product_delete', {'id' : product.id }) }}"
-                            onclick="return confirm('Etes-vous sûr de vouloir supprimer ce produit ?')"
-                        >
-                            {{ ux_icon('lucide:trash-2', {class : 'text-danger icon'}) }}
-                        </a>
+
+                            <a href="{{ path('app_product_show', {'id' : product.id }) }}" class="col-2">
+                                {{ ux_icon('lucide:file', {class : 'text-warning icon'}) }}
+                            </a>
+
+                            <a href="{{ path('app_product_edit', {'id' : product.id }) }}" class="col-2">
+                                {{ ux_icon('lucide:edit', {class : 'text-info icon'}) }}
+                            </a>
+
+                            <a 
+                                href="{{ path('app_product_delete', {'id' : product.id }) }}"
+                                onclick="return confirm('Etes-vous sûr de vouloir supprimer ce produit ?')"
+                                class="col-2"
+                            >
+                                {{ ux_icon('lucide:trash-2', {class : 'text-danger icon'}) }}
+                            </a>
+                        </div>
                     </td>
                 </tr>
             {% else %}
@@ -129,5 +146,43 @@
             {% endfor %}
         </tbody>
     </table>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        console.log('ok')
+
+        let checkStatus = document.querySelectorAll('.checkStatus');
+       
+
+        checkStatus.forEach(function(check){
+            check.addEventListener('change', function(){
+                console.log(this.value);
+
+                let data = {
+                    'id': this.value
+                }
+
+                let url = "/ajax/check/status"
+
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+
+                })
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response)
+                })
+            })
+        })
+    </script>
+
 
 {% endblock %}
