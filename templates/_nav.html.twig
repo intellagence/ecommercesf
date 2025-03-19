@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-warning">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('app_home') }}">Ecommerce</a>
+        <a class="navbar-brand" href="{{ path('app_home') }}">{{ name }}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,6 +10,17 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_catalog') }}">Catalogue</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Catégories
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for tabCategory in tabService.categories %}
+                            <li><a class="dropdown-item" href="#">{{ tabCategory.name }}</a></li>
+                        {% endfor %}
+                    </ul>
                 </li>
 
                 

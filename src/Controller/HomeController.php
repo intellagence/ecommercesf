@@ -102,7 +102,7 @@ final class HomeController extends AbstractController // héritage de AbstractCo
 
             'firstNameTwig' => $firstNameController,
             'fruits' => $fruitsController,
-            'age' => 19
+            'age' => 19,
         ]);
     }
 
@@ -115,7 +115,7 @@ final class HomeController extends AbstractController // héritage de AbstractCo
         // SELECT * FROM product WHERE status = 1
 
         return $this->render('home/catalog.html.twig', [
-            'products' => $products
+            'products' => $products,
         ]);
     }
 
