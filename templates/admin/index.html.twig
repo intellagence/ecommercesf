@@ -4,14 +4,28 @@
 
 {% block body %}
 
-    <a class="btn btn-primary" href="{{ path('app_product_index') }}">Gestion des produits</a>
+    <div class="row">
 
-    <a class="btn btn-danger" href="{{ path('app_category_index') }}">Gestion des catégories</a>
+        <div class="col-md-3">
 
-    <a class="btn btn-success" href="{{ path('app_brand_index') }}">Gestion des marques</a>
+            <a class="btn btn-primary w-100" href="{{ path('app_product_index') }}">Gestion des produits</a>
 
-    <a class="btn btn-warning" href="{{ path('app_material_index') }}">Gestion des matières</a>
+            <a class="btn btn-danger w-100" href="{{ path('app_category_index') }}">Gestion des catégories</a>
 
-    <a class="btn btn-info" href="{{ path('app_comment_index') }}">Gestion des commentaires</a>
+            <a class="btn btn-success w-100" href="{{ path('app_brand_index') }}">Gestion des marques</a>
+
+            <a class="btn btn-warning w-100" href="{{ path('app_material_index') }}">Gestion des matières</a>
+
+            <a class="btn btn-info w-100" href="{{ path('app_comment_index') }}">Gestion des commentaires</a>
+
+        </div>
+
+        <div class="col-md-9">
+            {% block dashboard_content %}{% endblock %}
+        </div>
+    
+    </div>
+
+
             
 {% endblock %}

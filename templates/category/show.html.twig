@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends "admin/index.html.twig" %}
 
 {% block h1 %}{{ category.name }}{% endblock %}
 
-{% block body %}
+{% block dashboard_content %}
 
     <a class="btn btn-primary" href="{{ path('app_category_index') }}">Gestion des catégories</a>
 
