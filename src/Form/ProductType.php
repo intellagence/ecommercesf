@@ -156,6 +156,7 @@ class ProductType extends AbstractType
 
             ->add('picture', FileType::class, [
                 'label' => 'Image à charger (facultatif)',
+                'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
