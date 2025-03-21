@@ -18,7 +18,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         {% for tabCategory in tabService.categories %}
-                            <li><a class="dropdown-item" href="#">{{ tabCategory.name }}</a></li>
+                            <li><a class="dropdown-item" href="{{ path("app_catalog_category", {'id' : tabCategory.id }) }}">{{ tabCategory.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>

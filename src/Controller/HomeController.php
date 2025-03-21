@@ -4,6 +4,7 @@ namespace App\Controller; // App correspond à 'src'
 
 use App\Entity\Comment;
 use App\Entity\Product;
+use App\Entity\Category;
 use App\Form\CommentType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -116,6 +117,19 @@ final class HomeController extends AbstractController // héritage de AbstractCo
 
         return $this->render('home/catalog.html.twig', [
             'products' => $products,
+        ]);
+    }
+
+    #[Route('/catalog/{id}', name:'app_catalog_category')]
+    // #[IsGranted('ROLE_ADMIN')]
+    public function catalogCategory(Category $category, ProductRepository $productRepository): Response
+    {
+        $products = $productRepository->findBy(['status' => true, 'category' => $category]); 
+        // SELECT * FROM product WHERE status = 1
+
+        return $this->render('home/catalog_category.html.twig', [
+            'products' => $products,
+            'category' => $category
         ]);
     }
 
