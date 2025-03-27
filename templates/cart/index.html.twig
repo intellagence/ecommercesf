@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Mon panier{% endblock %}
+
+{% block body %}
+    <pre>
+        {{ dump(cart) }}
+    </pre>
+{% endblock %}

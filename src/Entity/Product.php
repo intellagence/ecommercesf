@@ -49,6 +49,9 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?bool $status = false;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $stock = 0;
+
     public function __construct()
     {
         $this->materials = new ArrayCollection();
@@ -194,6 +197,18 @@ class Product
     public function setStatus(?bool $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?int $stock): static
+    {
+        $this->stock = $stock;
 
         return $this;
     }

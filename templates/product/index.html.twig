@@ -24,6 +24,7 @@
                 <th>Catégorie</th>
                 <th>Marque</th>
                 <th>Image</th>
+                <th>Stock</th>
                 <th></th>
             </tr>
         </thead>
@@ -103,6 +104,10 @@
                         {% else %}
                             {{ ux_icon('iconoir:xmark', {class : 'text-danger icon'}) }}
                         {% endif %}
+                    </td>
+
+                    <td>
+                        {{ product.stock }}
                     </td>
 
                     <td>

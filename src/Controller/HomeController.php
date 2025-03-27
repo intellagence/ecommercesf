@@ -121,11 +121,9 @@ final class HomeController extends AbstractController // héritage de AbstractCo
     }
 
     #[Route('/catalog/{id}', name:'app_catalog_category')]
-    // #[IsGranted('ROLE_ADMIN')]
     public function catalogCategory(Category $category, ProductRepository $productRepository): Response
     {
         $products = $productRepository->findBy(['status' => true, 'category' => $category]); 
-        // SELECT * FROM product WHERE status = 1
 
         return $this->render('home/catalog_category.html.twig', [
             'products' => $products,

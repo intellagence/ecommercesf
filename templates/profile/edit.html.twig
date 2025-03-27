@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Modifier mon compte{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form)}}
+
+        {{ form_row(form.email)}}
+        {{ form_row(form.lastName)}}
+        {{ form_row(form.firstName)}}
+
+        <input type="submit" value="Modifier mon compte" class="btn btn-primary w-100 mt-3">
+    {{ form_end(form)}}
+
+
+{% endblock %}
