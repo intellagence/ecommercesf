@@ -6,6 +6,7 @@ use App\Entity\Comment;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Form\CommentType;
+use App\Form\ProductFilterType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,13 +111,37 @@ final class HomeController extends AbstractController // héritage de AbstractCo
 
     #[Route('/catalog', name:'app_catalog')]
     // #[IsGranted('ROLE_ADMIN')]
-    public function catalog(ProductRepository $productRepository): Response
+    public function catalog(ProductRepository $productRepository, Request $request): Response
     {
-        $products = $productRepository->findBy(['status' => true]); 
+        // $products = $productRepository->findBy(
+        //     ['status' => true ],
+        //     ['price' => 'DESC', 'title' => 'DESC'],
+        //     5
+        // ); 
         // SELECT * FROM product WHERE status = 1
+
+        // findAll() => SELECT * FROM product 
+        // find(int $arg) => SELECT * FROM product WHERE id = 
+        // findBy() SELECT * FROM product WHERE stock = 2 AND status = 0
+        // findOneBy
+        // $products = $productRepository->findProductActived(true);
+
+        $form = $this->createForm(ProductFilterType::class);
+        $form->handleRequest($request);
+
+        $search = $form->get('search')->getData();
+        $order = $form->get('order')->getData();
+        $categories = $form->get('categories')->getData();
+        // dump($categories);
+        
+
+        
+
+        $products = $productRepository->findProductFilter($search, $order, $categories);
 
         return $this->render('home/catalog.html.twig', [
             'products' => $products,
+            'form' => $form->createView()
         ]);
     }
 

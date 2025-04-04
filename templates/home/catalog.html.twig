@@ -6,6 +6,15 @@
 
 {% block body %}
 
+    <div class="border border-dark p-4 m-4 bg-white">
+        {{ form_start(form) }}
+            {{ form_row(form.search) }}
+            {{ form_row(form.order) }}
+            {{ form_row(form.categories) }}
+            <input type="submit" value="Filtrer" class="btn btn-primary w-100 mt-3">
+        {{ form_end(form) }}
+    </div>
+
     <div class="row">
         {% for product in products %}
             <div class="col-xl-3 col-lg-4 col-md-6">
@@ -22,11 +31,17 @@
                     {% if product.brand %}
                         <p class="fst-italic bold mt-1">{{ product.brand.name|upper }}</p>
                     {% endif %}
+
+                    {% if product.category %}
+                        <p class="fst-italic bold mt-1">{{ product.category.name|upper }}</p>
+                    {% endif %}
                     
                     <p class="text-end mt-3 size20">{{ product.price }} €</p>
                     <a class="btn btn-dark text-white w-100" href="{{ path('app_catalog_product', {'id': product.id })}}">En savoir plus</a>
                 </div>
             </div>
+        {% else %}
+            <h2>Aucun résultat</h2>
         {% endfor %}
     </div>
 
